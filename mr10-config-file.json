@@ -1,0 +1,42 @@
+{
+        "xapp_name": "mr10",
+        "version": "0.0.1",
+        "containers": [
+            {
+                "name": "mr10",
+                "image": {
+                    "registry": "xApp-registry.local:5008",
+                    "name": "mr10",
+                    "tag": "0.0.1"
+                }
+            }
+        ],
+        "messaging": {
+            "ports": [
+                {
+                    "name": "rmr-data",
+                    "container": "mr",
+                    "port": 4560,
+                    "txMessages": ["mr_SENT_DATA"],
+                    "rxMessages": ["mr_ACK"],
+                    "policies": [],
+                    "description": "rmr receive data port for mr"
+                },
+                {
+                    "name": "rmr-route",
+                    "container": "mr",
+                    "port": 4561,
+                    "description": "rmr route port for mr"
+                }
+            ]
+        },
+        "rmr": {
+            "protPort": "tcp:4560",
+            "maxSize": 2072,
+            "numWorkers": 1,
+            "rxMessages": ["mr_ACK"],
+            "txMessages": ["mr_SENT_DATA"],
+            "policies": []
+        }
+
+}
